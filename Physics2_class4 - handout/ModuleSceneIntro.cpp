@@ -41,7 +41,7 @@ bool ModuleSceneIntro::Start()
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
 
-	sensor = App->physics->CreateRectangleSensor(455+10, 834+5, 25, 21);
+	//sensor = App->physics->CreateRectangleSensor(455+10, 834+5, 25, 21);
 
 	int left_bouncer[22] = {
 		11, 16,
@@ -272,7 +272,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 	App->audio->PlayFx(bonus_fx);
 
-	/*
+	
 	if(bodyA)
 	{
 		bodyA->GetPosition(x, y);
@@ -283,5 +283,5 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
 		bodyB->GetPosition(x, y);
 		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
-	}*/
+	}
 }

@@ -19,13 +19,19 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
+
 public:
 
 	SDL_Texture* Spring;
+	SDL_Texture* ball_texture;
 	
 	SDL_Rect spring_control;
 
 	PhysBody* Ball;
+	PhysBody* BallSensor;
+
+	bool Shoot;
 
 	uint force_counter;
 };
