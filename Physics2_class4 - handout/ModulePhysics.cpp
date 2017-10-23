@@ -304,6 +304,16 @@ bool ModulePhysics::Start()
 
 	CreateChain(0, 0, rigth_sile, 27, b2_staticBody);
 
+	int canon_box[10] = {
+		480, 829,
+		451, 829,
+		451, 855,
+		480, 855,
+		480, 829
+	};
+
+	CreateChain(0, 0, canon_box, 9, b2_staticBody);
+
 	return true;
 }
 
