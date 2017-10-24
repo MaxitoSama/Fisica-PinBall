@@ -52,7 +52,7 @@ bool ModulePhysics::Start()
 		477, 872
 	};
 
-	CreateChain(-25, -17, PinBall_Board, 13, b2_staticBody);
+	CreateChain(-25, -17, PinBall_Board, 13, b2_staticBody, 0.0f);
 
 	int PinBall_Right_Part[64] = {
 		477, 872,
@@ -89,7 +89,7 @@ bool ModulePhysics::Start()
 		480, 873
 	};
 
-	CreateChain(-25, -17, PinBall_Right_Part, 63, b2_staticBody);
+	CreateChain(-25, -17, PinBall_Right_Part, 63, b2_staticBody, 0.5f);
 
 	int Inside_1[220] = {
 		130, 853,
@@ -204,7 +204,7 @@ bool ModulePhysics::Start()
 		129, 854
 	};
 
-	CreateChain(0, 0, Inside_1, 219, b2_staticBody);
+	CreateChain(0, 0, Inside_1, 219, b2_staticBody, 0.5f);
 
 	int Inside_2[98] = {
 		265, 48,
@@ -258,7 +258,7 @@ bool ModulePhysics::Start()
 		265, 48
 	};
 
-	CreateChain(0, 0, Inside_2, 97, b2_staticBody);
+	CreateChain(0, 0, Inside_2, 97, b2_staticBody, 0.5f);
 
 	int Canon[12] = {
 		480, 855,
@@ -269,7 +269,7 @@ bool ModulePhysics::Start()
 		450, 854
 	};
 
-	CreateChain(0, 0, Canon, 12, b2_staticBody);
+	CreateChain(0, 0, Canon, 12, b2_staticBody, 0.0f);
 
 	int left_slide[18] = {
 		33, 628,
@@ -283,7 +283,7 @@ bool ModulePhysics::Start()
 		33, 628
 	};
 
-	CreateChain(0, 0, left_slide, 17, b2_staticBody);
+	CreateChain(0, 0, left_slide, 17, b2_staticBody, 0.0f);
 
 	int rigth_sile[28] = {
 		317, 791,
@@ -302,7 +302,7 @@ bool ModulePhysics::Start()
 		317, 791
 	};
 
-	CreateChain(0, 0, rigth_sile, 27, b2_staticBody);
+	CreateChain(0, 0, rigth_sile, 27, b2_staticBody, 0.5f);
 
 	int canon_box[10] = {
 		480, 829,
@@ -312,7 +312,7 @@ bool ModulePhysics::Start()
 		480, 829
 	};
 
-	CreateChain(0, 0, canon_box, 9, b2_staticBody);
+	CreateChain(0, 0, canon_box, 9, b2_staticBody, 0.0f);
 
 	return true;
 }
@@ -336,7 +336,7 @@ update_status ModulePhysics::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type)
+PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type, float restitution)
 {
 	b2BodyDef body;
 	body.type = type;
@@ -349,6 +349,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type)
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
 	fixture.density = 1.0f;
+	fixture.restitution = restitution;
 
 	b->CreateFixture(&fixture);
 
@@ -412,7 +413,7 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, b2BodyType type)
+PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, b2BodyType type, float restitution)
 {
 	b2BodyDef body;
 	body.type = type;
@@ -433,6 +434,7 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, b2Body
 
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
+	fixture.restitution = restitution;
 
 	b->CreateFixture(&fixture);
 

@@ -26,7 +26,7 @@ bool ModulePlayer::Start()
 
 	Shoot = false;
 	
-	Ball = App->physics->CreateCircle(455, 824, 11, b2_dynamicBody);
+	Ball = App->physics->CreateCircle(455, 824, 11, b2_dynamicBody, 0.4f);
 	
 	BallSensor= App->physics->CreateRectangleSensor(455 + 10, 834 + 5, 25, 21);
 	BallSensor->listener = this;
