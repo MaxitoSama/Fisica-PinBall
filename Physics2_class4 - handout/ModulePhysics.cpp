@@ -53,7 +53,7 @@ bool ModulePhysics::Start()
 		477, 872
 	};
 
-	CreateChain(-25, -17, PinBall_Board, 13, b2_staticBody, 0.0f);
+	//CreateChain(-25, -17, PinBall_Board, 13, b2_staticBody, 0.0f);
 
 	int PinBall_Right_Part[64] = {
 		477, 872,
@@ -303,7 +303,7 @@ bool ModulePhysics::Start()
 		317, 791
 	};
 
-	CreateChain(0, 0, rigth_sile, 27, b2_staticBody, 0.5f);
+	CreateChain(0, 0, rigth_sile, 27, b2_staticBody, 0.0f);
 
 	int canon_box[10] = {
 		480, 829,

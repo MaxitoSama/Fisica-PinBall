@@ -43,7 +43,7 @@ bool ModuleSceneIntro::Start()
 
 	//sensor = App->physics->CreateRectangleSensor(455+10, 834+5, 25, 21);
 
-	int left_bouncer[22] = {
+	int left_block[22] = {
 		11, 16,
 		11, 105,
 		53, 134,
@@ -52,14 +52,26 @@ bool ModuleSceneIntro::Start()
 		69, 129,
 		69, 122,
 		32, 13,
-		28, 9,
+		28, 10,
 		17, 9,
 		11, 16,
 	};
-	leftbouncer.add(App->physics->CreateChain(51, 600, left_bouncer, 21, b2_staticBody, 1.1f));
+	
+	leftbouncer.add(App->physics->CreateChain(51, 600, left_block, 21, b2_staticBody, 0.3f));
 
-	int right_bouncer[20] = {
-		61, 9,
+	int left_block_bouncer[10] = {
+		372, 610,
+		334, 722,
+		348, 723,
+		380, 616,
+		372, 610
+	};
+	
+	App->physics->CreateChain(0, 0, left_block_bouncer, 9, b2_staticBody, 1.1f);
+
+
+	int right_block[20] = {
+		61, 10,
 		50, 9,
 		44, 15,
 		9, 123,
@@ -70,7 +82,18 @@ bool ModuleSceneIntro::Start()
 		67, 16,
 		61, 9
 	};
-	rightbouncer.add(App->physics->CreateChain(325, 600, right_bouncer, 19, b2_staticBody, 1.1f));
+	
+	rightbouncer.add(App->physics->CreateChain(325, 600, right_block, 19, b2_staticBody, 0.3f));
+
+	int right_block_bouncer[10] = {
+		121, 723,
+		83, 612,
+		74, 616,
+		107, 724,
+		121, 723
+	};
+	
+	App->physics->CreateChain(0, 0, right_block_bouncer, 9, b2_staticBody, 1.1f);
 
 	rightflipper = App->physics->CreateRectangle(250+30, 790+13, 77,14, b2_dynamicBody);
 	leftflipper=App->physics->CreateRectangle(140+41, 790+13, 77,14, b2_dynamicBody);
