@@ -52,7 +52,7 @@ bool ModulePhysics::Start()
 		477, 872
 	};
 
-	CreateChain(-25, -17, PinBall_Board, 13, b2_staticBody, 0.0f);
+	//CreateChain(-25, -17, PinBall_Board, 13, b2_staticBody, 0.0f);
 
 	int PinBall_Right_Part[64] = {
 		477, 872,
@@ -302,7 +302,7 @@ bool ModulePhysics::Start()
 		317, 791
 	};
 
-	CreateChain(0, 0, rigth_sile, 27, b2_staticBody, 0.5f);
+	CreateChain(0, 0, rigth_sile, 27, b2_staticBody, 0.0f);
 
 	int canon_box[10] = {
 		480, 829,
@@ -333,7 +333,7 @@ bool ModulePhysics::Start()
 		299, 228
 	};
 
-	CreateChain(0, 0, left_small_block, 31, b2_staticBody);
+	CreateChain(0, 0, left_small_block, 31, b2_staticBody, 0.0f);
 
 	int right_small_block[14] = {
 		346, 249,
@@ -345,7 +345,7 @@ bool ModulePhysics::Start()
 		345, 248
 	};
 
-	CreateChain(0, 0, right_small_block, 13, b2_staticBody);
+	CreateChain(0, 0, right_small_block, 13, b2_staticBody, 0.0f);
 
 	int long_block[46] = {
 		108, 357,
@@ -373,7 +373,7 @@ bool ModulePhysics::Start()
 		108, 358
 	};
 
-	CreateChain(0, 0, long_block, 45, b2_staticBody);
+	CreateChain(0, 0, long_block, 45, b2_staticBody, 0.0f);
 
 	int right_long_block[76] = {
 		375, 195,
@@ -416,7 +416,7 @@ bool ModulePhysics::Start()
 		375, 195
 	};
 
-	CreateChain(0, 0, right_long_block, 75, b2_staticBody);
+	CreateChain(0, 0, right_long_block, 75, b2_staticBody, 0.0f);
 
 	int tiny_block_1[18] = {
 		276, 97,
@@ -430,13 +430,13 @@ bool ModulePhysics::Start()
 		276, 97
 	};
 
-	CreateChain(0, 0, tiny_block_1, 17, b2_staticBody);
+	CreateChain(0, 0, tiny_block_1, 17, b2_staticBody, 0.0f);
 
-	CreateChain(33, 0, tiny_block_1, 17, b2_staticBody);
+	CreateChain(33, 0, tiny_block_1, 17, b2_staticBody, 0.0f);
 
-	CreateChain(67, 0, tiny_block_1, 17, b2_staticBody);
+	CreateChain(67, 0, tiny_block_1, 17, b2_staticBody, 0.0f);
 
-	CreateChain(99, 0, tiny_block_1, 17, b2_staticBody);
+	CreateChain(99, 0, tiny_block_1, 17, b2_staticBody, 0.0f);
 
 
 	return true;
