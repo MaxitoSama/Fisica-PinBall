@@ -37,6 +37,7 @@ bool ModulePhysics::Start()
 	b2BodyDef bd;
 	ground = world->CreateBody(&bd);
 
+	//Bouncer1 = CreateCircle();
 	// big static circle as "ground" in the middle of the screen
 	int x = SCREEN_WIDTH / 2;
 	int y = SCREEN_HEIGHT / 1.5f;
@@ -333,7 +334,7 @@ bool ModulePhysics::Start()
 		299, 228
 	};
 
-	CreateChain(0, 0, left_small_block, 31, b2_staticBody);
+	CreateChain(0, 0, left_small_block, 31, b2_staticBody, 0.4f);
 
 	int right_small_block[14] = {
 		346, 249,
@@ -345,7 +346,7 @@ bool ModulePhysics::Start()
 		345, 248
 	};
 
-	CreateChain(0, 0, right_small_block, 13, b2_staticBody);
+	CreateChain(0, 0, right_small_block, 13, b2_staticBody, 0.4f);
 
 	int long_block[46] = {
 		108, 357,
@@ -373,7 +374,7 @@ bool ModulePhysics::Start()
 		108, 358
 	};
 
-	CreateChain(0, 0, long_block, 45, b2_staticBody);
+	CreateChain(0, 0, long_block, 45, b2_staticBody, 0.4f);
 
 	int right_long_block[76] = {
 		375, 195,
@@ -416,7 +417,7 @@ bool ModulePhysics::Start()
 		375, 195
 	};
 
-	CreateChain(0, 0, right_long_block, 75, b2_staticBody);
+	CreateChain(0, 0, right_long_block, 75, b2_staticBody, 0.4f);
 
 	int tiny_block_1[18] = {
 		276, 97,
@@ -430,13 +431,13 @@ bool ModulePhysics::Start()
 		276, 97
 	};
 
-	CreateChain(0, 0, tiny_block_1, 17, b2_staticBody);
+	CreateChain(0, 0, tiny_block_1, 17, b2_staticBody, 0.2f);
 
-	CreateChain(33, 0, tiny_block_1, 17, b2_staticBody);
+	CreateChain(33, 0, tiny_block_1, 17, b2_staticBody, 0.2f);
 
-	CreateChain(67, 0, tiny_block_1, 17, b2_staticBody);
+	CreateChain(67, 0, tiny_block_1, 17, b2_staticBody, 0.2f);
 
-	CreateChain(99, 0, tiny_block_1, 17, b2_staticBody);
+	CreateChain(99, 0, tiny_block_1, 17, b2_staticBody, 0.2f);
 
 
 	return true;
@@ -468,6 +469,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type,
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
+	b->SetBullet(true);
 
 	b2CircleShape shape;
 	shape.m_radius = PIXEL_TO_METERS(radius);
