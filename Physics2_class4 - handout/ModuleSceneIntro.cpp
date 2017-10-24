@@ -272,7 +272,6 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 	App->audio->PlayFx(bonus_fx);
 
-	
 	if(bodyA)
 	{
 		bodyA->GetPosition(x, y);
