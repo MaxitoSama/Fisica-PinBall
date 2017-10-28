@@ -67,13 +67,14 @@ update_status ModulePlayer::Update()
 		force_counter += 1;
 	}
 	
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP)
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP && Shoot==true)
 	{
 		float force= ((float)force_counter * 25)/3;
 		spring_control.y = 834;
 		Ball->body->ApplyForce({ 0,-force}, Ball->body->GetLocalCenter(), true);
 		force_counter = 0;
 		Shoot = false;
+		App->scene_intro->slide_block= App->physics->CreateRectangle(253, 26, 5, 31, b2_staticBody);
 	}
 	
 	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
@@ -89,7 +90,7 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	if (bodyA->body->GetFixtureList()->IsSensor())
+	if (bodyA)
 	{
 		if (bodyA == BallSensor && App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
 		{

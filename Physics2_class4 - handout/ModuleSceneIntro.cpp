@@ -12,6 +12,7 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	circle = box = rick = NULL;
 	ray_on = false;
 	sensed = false;
+	open = false;
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -51,10 +52,18 @@ bool ModuleSceneIntro::Start()
 	
 	bouncer_1 = new PhysBody();
 	bouncer_1 = App->physics->CreateCircle(267, 155, 22, b2_staticBody, 2.0f);
+	
 	bouncer_2 = new PhysBody();
 	bouncer_2 = App->physics->CreateCircle(370, 162, 22, b2_staticBody, 2.0f);
+	
 	bouncer_3 = new PhysBody();
 	bouncer_3 = App->physics->CreateCircle(306, 223, 22, b2_staticBody, 2.0f);
+
+	slide_block = new PhysBody();
+
+	sensorblocker = new PhysBody();
+	sensorblocker = App->physics->CreateRectangleSensor(330, 110, 100, 10);
+	sensorblocker->listener = this;
 	
 	
 	int left_block[22] = {
@@ -301,6 +310,12 @@ update_status ModuleSceneIntro::Update()
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 
+	if (open==true && slide_block->body!=nullptr)
+	{
+		slide_block->body->GetWorld()->DestroyBody(slide_block->body);
+		slide_block->body = nullptr;
+		open = false;
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -312,8 +327,12 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 	if(bodyA)
 	{
-		bodyA->GetPosition(x, y);
-		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
+		if (bodyA == sensorblocker && slide_block->body != nullptr)
+		{
+			LOG("hola");
+			open = true;
+		}
+	
 	}
 
 	if(bodyB)
