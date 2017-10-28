@@ -19,18 +19,28 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player");
 
+	//TEXTURES----------------------
 	Spring = App->textures->Load("pinball/PinBall_Spring.png");
 	ball_texture = App->textures->Load("pinball/Ball.png");
+	blocker_texture = App->textures->Load("pinball/slide_blocker.png");
 
+	//RECTS-------------------------
 	spring_control = { 455,834,17,21 };
 
+	//BOOLS-------------------------
 	Shoot = false;
-	
+	restart = false;
+
+	//BODIES------------------------
 	Ball = App->physics->CreateCircle(455, 824, 11, b2_dynamicBody, 0.4f);
 	
 	BallSensor= App->physics->CreateRectangleSensor(455 + 10, 834 + 5, 25, 21);
 	BallSensor->listener = this;
 
+	Restart = App->physics->CreateRectangleSensor(240, 870, 480, 10);
+	Restart->listener = this;
+
+	//COUNTERS---------------------
 	force_counter = 0;
 
 	return true;
@@ -80,6 +90,19 @@ update_status ModulePlayer::Update()
 	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
 		Ball->body->SetTransform({ PIXEL_TO_METERS(455), PIXEL_TO_METERS(824) }, 0.0f);
+		Ball->body->SetLinearVelocity({ 0,0 });
+	}
+
+	if (App->scene_intro->slide_block->body)
+	{
+		App->renderer->Blit(blocker_texture, 251, 11);
+	}
+
+	if (restart == true)
+	{
+		Ball->body->SetTransform({ PIXEL_TO_METERS(455), PIXEL_TO_METERS(824) }, 0.0f);
+		Ball->body->SetLinearVelocity({ 0,0 });
+		restart = false;
 	}
 
 	App->renderer->Blit(Spring, spring_control.x, spring_control.y);
@@ -90,11 +113,15 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	if (bodyA)
+	if (bodyA->body->GetFixtureList()->IsSensor())
 	{
 		if (bodyA == BallSensor && App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
 		{
 			Shoot = true;
+		}
+		if (bodyA == Restart)
+		{
+			restart = true;
 		}
 	}
 }

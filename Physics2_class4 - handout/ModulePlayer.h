@@ -25,13 +25,16 @@ public:
 
 	SDL_Texture* Spring;
 	SDL_Texture* ball_texture;
+	SDL_Texture* blocker_texture;
 	
 	SDL_Rect spring_control;
 
 	PhysBody* Ball;
 	PhysBody* BallSensor;
+	PhysBody* Restart;
 
 	bool Shoot;
+	bool restart;
 
 	uint force_counter;
 };
