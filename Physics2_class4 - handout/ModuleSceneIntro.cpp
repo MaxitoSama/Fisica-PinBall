@@ -30,6 +30,9 @@ bool ModuleSceneIntro::Start()
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
+
+	//--------------------------Image sources------------------------------------------------
+
 	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
@@ -43,6 +46,17 @@ bool ModuleSceneIntro::Start()
 
 	//sensor = App->physics->CreateRectangleSensor(455+10, 834+5, 25, 21);
 
+
+	//--------------------------Scene Elements------------------------------------------------
+	
+	bouncer_1 = new PhysBody();
+	bouncer_1 = App->physics->CreateCircle(267, 155, 22, b2_staticBody, 2.0f);
+	bouncer_2 = new PhysBody();
+	bouncer_2 = App->physics->CreateCircle(370, 162, 22, b2_staticBody, 2.0f);
+	bouncer_3 = new PhysBody();
+	bouncer_3 = App->physics->CreateCircle(306, 223, 22, b2_staticBody, 2.0f);
+	
+	
 	int left_block[22] = {
 		11, 16,
 		11, 105,
@@ -67,7 +81,7 @@ bool ModuleSceneIntro::Start()
 		372, 610
 	};
 	
-	App->physics->CreateChain(0, 0, left_block_bouncer, 9, b2_staticBody, 1.1f);
+	App->physics->CreateChain(0, 0, left_block_bouncer, 9, b2_staticBody, 2.0f);
 
 
 	int right_block[20] = {
@@ -93,8 +107,11 @@ bool ModuleSceneIntro::Start()
 		121, 723
 	};
 	
-	App->physics->CreateChain(0, 0, right_block_bouncer, 9, b2_staticBody, 1.1f);
-
+	App->physics->CreateChain(0, 0, right_block_bouncer, 9, b2_staticBody, 2.0f);
+	
+	//----------------------------------------------------------------------------------------
+	
+	
 	rightflipper = App->physics->CreateRectangle(250+30, 790+13, 77,14, b2_dynamicBody);
 	leftflipper=App->physics->CreateRectangle(140+41, 790+13, 77,14, b2_dynamicBody);
 

@@ -29,10 +29,14 @@ public:
 	p2List<PhysBody*>	ricks;
 	p2List<PhysBody*>	leftbouncer;
 	p2List<PhysBody*>	rightbouncer;
+	
 	PhysBody*			leftflipper;
 	PhysBody*			rightflipper;
 	PhysBody*			l_flipper_joint;
 	PhysBody*			r_flipper_joint;
+	PhysBody*			bouncer_1;
+	PhysBody*			bouncer_2;
+	PhysBody*			bouncer_3;
 
 	PhysBody* sensor;
 	bool sensed;
