@@ -420,15 +420,15 @@ bool ModulePhysics::Start()
 	CreateChain(0, 0, right_long_block, 75, b2_staticBody, 0.4f);
 
 	int tiny_block_1[18] = {
-		276, 97,
-		276, 78,
-		273, 74,
-		269, 74,
-		266, 76,
-		266, 98,
-		269, 100,
-		273, 100,
-		276, 97
+		274, 97,
+		274, 78,
+		272, 74,
+		270, 74,
+		268, 76,
+		268, 98,
+		270, 100,
+		272, 100,
+		274, 97
 	};
 
 	CreateChain(0, 0, tiny_block_1, 17, b2_staticBody, 0.2f);
@@ -437,7 +437,7 @@ bool ModulePhysics::Start()
 
 	CreateChain(67, 0, tiny_block_1, 17, b2_staticBody, 0.2f);
 
-	CreateChain(99, 0, tiny_block_1, 17, b2_staticBody, 0.2f);
+	CreateChain(100, 0, tiny_block_1, 17, b2_staticBody, 0.2f);
 
 
 	return true;

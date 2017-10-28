@@ -90,7 +90,7 @@ bool ModuleSceneIntro::Start()
 		372, 610
 	};
 	
-	App->physics->CreateChain(0, 0, left_block_bouncer, 9, b2_staticBody, 2.0f);
+	App->physics->CreateChain(0, 0, left_block_bouncer, 9, b2_staticBody, 1.6f);
 
 
 	int right_block[20] = {
@@ -116,7 +116,7 @@ bool ModuleSceneIntro::Start()
 		121, 723
 	};
 	
-	App->physics->CreateChain(0, 0, right_block_bouncer, 9, b2_staticBody, 2.0f);
+	App->physics->CreateChain(0, 0, right_block_bouncer, 9, b2_staticBody, 1.6f);
 	
 	//----------------------------------------------------------------------------------------
 	

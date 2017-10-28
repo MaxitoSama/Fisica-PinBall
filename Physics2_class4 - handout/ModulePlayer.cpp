@@ -63,12 +63,12 @@ update_status ModulePlayer::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
 	{
-		App->scene_intro->leftflipper->body->ApplyAngularImpulse(-5.0f,true);
+		App->scene_intro->leftflipper->body->ApplyAngularImpulse(-7.0f,true);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
-		App->scene_intro->rightflipper->body->ApplyAngularImpulse(5.0f, true);
+		App->scene_intro->rightflipper->body->ApplyAngularImpulse(7.0f, true);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && spring_control.y<=852 && Shoot==true)
