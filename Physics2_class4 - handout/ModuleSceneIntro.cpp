@@ -1,11 +1,13 @@
 #include "Globals.h"
 #include "Application.h"
+#include "ModuleWindow.h"
 #include "ModuleRender.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
+#include "ModulePlayer.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -52,17 +54,23 @@ bool ModuleSceneIntro::Start()
 	
 	bouncer_1 = new PhysBody();
 	bouncer_1 = App->physics->CreateCircle(267, 155, 22, b2_staticBody, 2.0f);
+	B_1sensor = App->physics->CreateCircle(267, 155, 24, b2_staticBody, 2.0f,true);
+	B_1sensor->listener = this;
 	
 	bouncer_2 = new PhysBody();
 	bouncer_2 = App->physics->CreateCircle(370, 162, 22, b2_staticBody, 2.0f);
+	B_2sensor = App->physics->CreateCircle(370, 162, 24, b2_staticBody, 2.0f, true);
+	B_2sensor->listener = this;
 	
 	bouncer_3 = new PhysBody();
 	bouncer_3 = App->physics->CreateCircle(306, 223, 22, b2_staticBody, 2.0f);
+	B_3sensor = App->physics->CreateCircle(306, 223, 24, b2_staticBody, 2.0f, true);
+	B_3sensor->listener = this;
 
 	slide_block = new PhysBody();
 
 	sensorblocker = new PhysBody();
-	sensorblocker = App->physics->CreateRectangleSensor(330, 110, 100, 10);
+	sensorblocker = App->physics->CreateRectangleSensor(330, 110, 100, 1);
 	sensorblocker->listener = this;
 	
 	
@@ -316,6 +324,14 @@ update_status ModuleSceneIntro::Update()
 		slide_block->body = nullptr;
 		open = false;
 	}
+
+	char score[64];
+	char Title[64] = "PinBall Score: ";
+	sprintf_s(score, "%d", App->player->score);
+	strcat_s(Title, score);
+
+	App->window->SetTitle(Title);
+
 	return UPDATE_CONTINUE;
 }
 
@@ -323,7 +339,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	int x, y;
 
-	App->audio->PlayFx(bonus_fx);
+	
 
 	if(bodyA)
 	{
@@ -332,7 +348,12 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			LOG("hola");
 			open = true;
 		}
-	
+		if (App->player->getpoints==false && (bodyA == B_1sensor || bodyA == B_2sensor || bodyA == B_3sensor))
+		{
+			App->audio->PlayFx(bonus_fx);
+			LOG("puntos");
+			App->player->getpoints = true;
+		}
 	}
 
 	if(bodyB)

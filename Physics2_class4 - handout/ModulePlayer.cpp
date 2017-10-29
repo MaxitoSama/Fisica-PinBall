@@ -30,6 +30,7 @@ bool ModulePlayer::Start()
 	//BOOLS-------------------------
 	Shoot = false;
 	restart = false;
+	getpoints = false;
 
 	//BODIES------------------------
 	Ball = App->physics->CreateCircle(455, 824, 11, b2_dynamicBody, 0.4f);
@@ -42,6 +43,7 @@ bool ModulePlayer::Start()
 
 	//COUNTERS---------------------
 	force_counter = 0;
+	score = 0;
 
 	return true;
 }
@@ -104,6 +106,11 @@ update_status ModulePlayer::Update()
 		Ball->body->SetLinearVelocity({ 0,0 });
 		restart = false;
 	}
+	if (getpoints == true)
+	{
+		score += 100;
+		getpoints = false;
+	}
 
 	App->renderer->Blit(Spring, spring_control.x, spring_control.y);
 	App->renderer->Blit(ball_texture, x,y);
@@ -122,6 +129,10 @@ void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (bodyA == Restart)
 		{
 			restart = true;
+		}
+		if (bodyA == App->scene_intro->B_1sensor)
+		{
+			LOG("puntos");
 		}
 	}
 }

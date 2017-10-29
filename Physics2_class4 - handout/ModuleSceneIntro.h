@@ -40,6 +40,9 @@ public:
 	PhysBody*			slide_block;
 
 	PhysBody*			sensorblocker;
+	PhysBody*			B_1sensor;
+	PhysBody*			B_2sensor;
+	PhysBody*			B_3sensor;
 
 	bool				open;
 
