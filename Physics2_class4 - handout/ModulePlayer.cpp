@@ -63,14 +63,14 @@ update_status ModulePlayer::Update()
 	Ball->GetPosition(x, y);
 	
 
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
-		App->scene_intro->leftflipper->body->ApplyAngularImpulse(-7.0f,true);
+		App->scene_intro->leftflipper->body->ApplyAngularImpulse(-3.0f,true);
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
-		App->scene_intro->rightflipper->body->ApplyAngularImpulse(7.0f, true);
+		App->scene_intro->rightflipper->body->ApplyAngularImpulse(3.0f, true);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && spring_control.y<=852 && Shoot==true)
@@ -93,6 +93,7 @@ update_status ModulePlayer::Update()
 	{
 		Ball->body->SetTransform({ PIXEL_TO_METERS(455), PIXEL_TO_METERS(824) }, 0.0f);
 		Ball->body->SetLinearVelocity({ 0,0 });
+		restart = false;
 	}
 
 	if (App->scene_intro->slide_block->body)
