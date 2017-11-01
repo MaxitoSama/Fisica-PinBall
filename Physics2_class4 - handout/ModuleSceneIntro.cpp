@@ -15,6 +15,7 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	ray_on = false;
 	sensed = false;
 	open = false;
+	canon_shoot = false;
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -73,6 +74,8 @@ bool ModuleSceneIntro::Start()
 	sensorblocker = App->physics->CreateRectangleSensor(330, 110, 100, 1);
 	sensorblocker->listener = this;
 	
+	canon_sensor = App->physics->CreateRectangleSensor(17, 845, 30, 30);
+	canon_sensor->listener = this;
 	
 	int left_block[22] = {
 		11, 16,
@@ -325,10 +328,25 @@ update_status ModuleSceneIntro::Update()
 		open = false;
 	}
 
+	if (canon_shoot == true)
+	{
+		if (SDL_GetTicks() >= ticks)
+		{
+			App->player->Ball->body->ApplyForce({ 0.0f,-200.0f },App->player->Ball->body->GetLocalCenter(),true);
+			LOG("force!");
+			canon_shoot = false;
+		}
+	}
+
 	char score[64];
+	char lives[4];
 	char Title[64] = "PinBall Score: ";
-	sprintf_s(score, "%d", App->player->score);
+	char Num_lives[32] = "Lives: ";
+	sprintf_s(score, "%d   ", App->player->score);
+	sprintf_s(lives, "%d", App->player->lives);
 	strcat_s(Title, score);
+	strcat_s(Title, Num_lives);
+	strcat_s(Title, lives);
 
 	App->window->SetTitle(Title);
 
@@ -338,8 +356,7 @@ update_status ModuleSceneIntro::Update()
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	int x, y;
-
-	
+	b2Vec2 stop = { 0.0f,0.0f };
 
 	if(bodyA)
 	{
@@ -354,6 +371,11 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			LOG("puntos");
 			App->player->getpoints = true;
 		}
+		if (bodyA == canon_sensor && canon_shoot == false && App->player->Ball->body->GetLinearVelocity()==stop)
+		{
+			canon_shoot = true;
+			Timer(1000);
+		}
 	}
 
 	if(bodyB)
@@ -361,4 +383,9 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		bodyB->GetPosition(x, y);
 		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
 	}
+}
+
+void ModuleSceneIntro::Timer(int time)
+{
+	ticks = SDL_GetTicks() + time;
 }

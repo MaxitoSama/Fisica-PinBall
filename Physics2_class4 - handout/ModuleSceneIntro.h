@@ -23,6 +23,8 @@ public:
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
+	void Timer(int time);
+
 public:
 	p2List<PhysBody*>	circles;
 	p2List<PhysBody*>	boxes;
@@ -38,6 +40,7 @@ public:
 	PhysBody*			bouncer_2;
 	PhysBody*			bouncer_3;
 	PhysBody*			slide_block;
+	PhysBody*			canon_sensor;
 
 	PhysBody*			sensorblocker;
 	PhysBody*			B_1sensor;
@@ -46,17 +49,22 @@ public:
 
 	bool				open;
 
-	bool sensed;
+	bool				sensed;
+	bool				canon_shoot;
 
-	SDL_Texture* circle;
-	SDL_Texture* box;
-	SDL_Texture* rick;
-	SDL_Texture* BackGround;
-	SDL_Texture* RightFlipper;
-	SDL_Texture* LeftFlipper;
-	SDL_Texture* LeftBouncer;
-	SDL_Texture* RightBouncer;
-	uint bonus_fx;
-	p2Point<int> ray;
-	bool ray_on;
+	SDL_Texture*		circle;
+	SDL_Texture*		box;
+	SDL_Texture*		rick;
+	SDL_Texture*		BackGround;
+	SDL_Texture*		RightFlipper;
+	SDL_Texture*		LeftFlipper;
+	SDL_Texture*		LeftBouncer;
+	SDL_Texture*		RightBouncer;
+
+	uint				bonus_fx;
+	uint				ticks;
+	
+	p2Point<int>		ray;
+	
+	bool				ray_on;
 };

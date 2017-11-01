@@ -18,26 +18,31 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+	void Timer(int time);
 
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
 public:
 
-	SDL_Texture* Spring;
-	SDL_Texture* ball_texture;
-	SDL_Texture* blocker_texture;
+	SDL_Texture*	Spring;
+	SDL_Texture*	ball_texture;
+	SDL_Texture*	blocker_texture;
+	SDL_Texture*	bouncers;
 	
-	SDL_Rect spring_control;
+	SDL_Rect		spring_control;
 
-	PhysBody* Ball;
-	PhysBody* BallSensor;
-	PhysBody* Restart;
+	PhysBody*		Ball;
+	PhysBody*		BallSensor;
+	PhysBody*		Restart;
 
-	bool Shoot;
-	bool restart;
-	bool getpoints;
+	bool			Shoot;
+	bool			restart;
+	bool			getpoints;
+	bool			pause;
 
-	uint force_counter;
-	uint score;
+	uint			force_counter;
+	uint			score;
+	uint			lives;
+	uint			ticks;
 
 };
