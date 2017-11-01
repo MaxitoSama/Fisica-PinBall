@@ -40,8 +40,9 @@ public:
 	PhysBody*			bouncer_2;
 	PhysBody*			bouncer_3;
 	PhysBody*			slide_block;
-	PhysBody*			canon_sensor;
+	PhysBody*			cannon_block;
 
+	PhysBody*			canon_sensor;
 	PhysBody*			sensorblocker;
 	PhysBody*			B_1sensor;
 	PhysBody*			B_2sensor;

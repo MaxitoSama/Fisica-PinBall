@@ -68,7 +68,9 @@ bool ModuleSceneIntro::Start()
 	B_3sensor = App->physics->CreateCircle(306, 223, 24, b2_staticBody, 2.0f, true);
 	B_3sensor->listener = this;
 
-	slide_block = new PhysBody();
+	slide_block = App->physics->CreateRectangle(253, 26, 5, 31, b2_staticBody);
+	cannon_block = App->physics->CreateRectangle(461, 150, 100, 10, b2_staticBody);
+	cannon_block->body->SetTransform(cannon_block->body->GetWorldCenter(), -78 * 0.0174532925);
 
 	sensorblocker = new PhysBody();
 	sensorblocker = App->physics->CreateRectangleSensor(330, 110, 100, 1);
@@ -132,10 +134,10 @@ bool ModuleSceneIntro::Start()
 	//----------------------------------------------------------------------------------------
 	
 	
-	rightflipper = App->physics->CreateRectangle(250+30, 790+13, 77,14, b2_dynamicBody);
-	leftflipper=App->physics->CreateRectangle(140+41, 790+13, 77,14, b2_dynamicBody);
+	rightflipper = App->physics->CreateRectangle(250+30, 790+15, 77,14, b2_dynamicBody);
+	leftflipper=App->physics->CreateRectangle(140+41, 790+18, 77,14, b2_dynamicBody);
 
-	l_flipper_joint =App->physics->CreateCircle(144+9, 800+3, 5, b2_staticBody, 0.0f);
+	l_flipper_joint =App->physics->CreateCircle(144+9, 800+8, 5, b2_staticBody, 0.0f);
 	r_flipper_joint =App->physics->CreateCircle(300 + 7, 800 + 3, 5, b2_staticBody, 0.0f);
 
 	def_1.Initialize(leftflipper->body, l_flipper_joint->body, l_flipper_joint->body->GetWorldCenter());
@@ -326,6 +328,7 @@ update_status ModuleSceneIntro::Update()
 		slide_block->body->GetWorld()->DestroyBody(slide_block->body);
 		slide_block->body = nullptr;
 		open = false;
+		cannon_block->body->SetActive(true);
 	}
 
 	if (canon_shoot == true)
@@ -362,15 +365,16 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
 		if (bodyA == sensorblocker && slide_block->body != nullptr)
 		{
-			LOG("hola");
 			open = true;
 		}
+
 		if (App->player->getpoints==false && (bodyA == B_1sensor || bodyA == B_2sensor || bodyA == B_3sensor))
 		{
 			App->audio->PlayFx(bonus_fx);
 			LOG("puntos");
 			App->player->getpoints = true;
 		}
+
 		if (bodyA == canon_sensor && canon_shoot == false && App->player->Ball->body->GetLinearVelocity()==stop)
 		{
 			canon_shoot = true;

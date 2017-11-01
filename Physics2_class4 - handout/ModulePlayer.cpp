@@ -90,7 +90,7 @@ update_status ModulePlayer::Update()
 		Ball->body->ApplyForce({ 0,-force}, Ball->body->GetLocalCenter(), true);
 		force_counter = 0;
 		Shoot = false;
-		App->scene_intro->slide_block= App->physics->CreateRectangle(253, 26, 5, 31, b2_staticBody);
+		App->scene_intro->cannon_block->body->SetActive(false);
 	}
 	
 	if (App->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
@@ -118,6 +118,7 @@ update_status ModulePlayer::Update()
 	{
 		Ball->body->SetTransform({ PIXEL_TO_METERS(455+0.2f), PIXEL_TO_METERS(824-0.2f) }, 0.0f);
 		Ball->body->SetLinearVelocity({ 0,0 });
+		App->scene_intro->slide_block = App->physics->CreateRectangle(253, 26, 5, 31, b2_staticBody);
 		
 		if (lives > 0)
 		{
