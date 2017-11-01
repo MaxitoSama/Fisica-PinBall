@@ -46,7 +46,9 @@ bool ModuleSceneIntro::Start()
 	RightBouncer = App->textures->Load("pinball/right block.png");
 	LeftBouncer = App->textures->Load("pinball/left block.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
-
+	LetterW = App->textures->Load("pinball/w circle.png");
+	LetterI = App->textures->Load("pinball/i circle.png");
+	LetterN = App->textures->Load("pinball/n circle.png");
 
 	//sensor = App->physics->CreateRectangleSensor(455+10, 834+5, 25, 21);
 
@@ -72,9 +74,17 @@ bool ModuleSceneIntro::Start()
 	cannon_block = App->physics->CreateRectangle(461, 150, 100, 10, b2_staticBody);
 	cannon_block->body->SetTransform(cannon_block->body->GetWorldCenter(), -78 * 0.0174532925);
 
-	sensorblocker = new PhysBody();
-	sensorblocker = App->physics->CreateRectangleSensor(330, 110, 100, 1);
-	sensorblocker->listener = this;
+	sensorblocker_w = new PhysBody();
+	sensorblocker_w = App->physics->CreateRectangleSensor(290, 110, 20, 1);
+	sensorblocker_w->listener = this;
+
+	sensorblocker_i = new PhysBody();
+	sensorblocker_i = App->physics->CreateRectangleSensor(323, 110, 20, 1);
+	sensorblocker_i->listener = this;
+
+	sensorblocker_n = new PhysBody();
+	sensorblocker_n = App->physics->CreateRectangleSensor(356, 110, 20, 1);
+	sensorblocker_n->listener = this;
 	
 	canon_sensor = App->physics->CreateRectangleSensor(17, 845, 30, 30);
 	canon_sensor->listener = this;
@@ -169,6 +179,29 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update()
 {
 	App->renderer->Blit(BackGround, 0, 0, NULL);
+	
+	if (w_passed == true)
+	{
+		App->renderer->Blit(LetterW, 271, 96, NULL);
+	}
+
+	if (i_passed == true)
+	{
+		App->renderer->Blit(LetterI, 304, 94, NULL);
+	}
+
+	if (n_passed == true)
+	{
+		App->renderer->Blit(LetterN, 335, 96, NULL);
+	}
+
+	if (w_passed == true && i_passed == true && n_passed == true)
+	{
+		App->player->score += 100000;
+		w_passed = false;
+		i_passed == false;
+		n_passed == false;
+	}
 
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
@@ -364,9 +397,22 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 	if(bodyA)
 	{
-		if (bodyA == sensorblocker && slide_block->body != nullptr)
+		if (bodyA == sensorblocker_w || bodyA == sensorblocker_i || bodyA == sensorblocker_n && slide_block->body != nullptr)
 		{
 			open = true;
+		}
+
+		if (bodyA == sensorblocker_w)
+		{
+			w_passed = true;
+		}
+		if (bodyA == sensorblocker_i)
+		{
+			i_passed = true;
+		}
+		if (bodyA == sensorblocker_n)
+		{
+			n_passed = true;
 		}
 
 		if (App->player->getpoints==false && (bodyA == B_1sensor || bodyA == B_2sensor || bodyA == B_3sensor))
