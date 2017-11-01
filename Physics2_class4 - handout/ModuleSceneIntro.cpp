@@ -335,6 +335,7 @@ update_status ModuleSceneIntro::Update()
 	{
 		if (SDL_GetTicks() >= ticks)
 		{
+			App->audio->PlayFx(App->player->drain);
 			App->player->Ball->body->ApplyForce({ 0.0f,-200.0f },App->player->Ball->body->GetLocalCenter(),true);
 			LOG("force!");
 			canon_shoot = false;

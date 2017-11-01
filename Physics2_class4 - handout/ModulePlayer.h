@@ -9,6 +9,8 @@
 #define METERS_TO_PIXELS(m) ((int) floor(PIXELS_PER_METER * m))
 #define PIXEL_TO_METERS(p)  ((float) METER_PER_PIXEL * p)
 
+//sound effects http://www.vpforums.org/Tutorials/Sounds/SndLib1.html
+
 class ModulePlayer : public Module
 {
 public:
@@ -44,5 +46,10 @@ public:
 	uint			score;
 	uint			lives;
 	uint			ticks;
+	
+	uint			flipperUp;
+	uint			flipperDown;
+	uint			drain;
+	uint			target;
 
 };

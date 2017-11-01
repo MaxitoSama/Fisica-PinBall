@@ -3,6 +3,7 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
+#include "ModuleAudio.h"
 #include "ModuleSceneIntro.h"
 #include "ModulePhysics.h"
 #include "ModulePlayer.h"
@@ -23,6 +24,9 @@ bool ModulePlayer::Start()
 	Spring = App->textures->Load("pinball/PinBall_Spring.png");
 	ball_texture = App->textures->Load("pinball/Ball.png");
 	blocker_texture = App->textures->Load("pinball/slide_blocker.png");
+	flipperUp =App->audio->LoadFx("pinball/FlipperUp1.wav");
+	flipperDown = App->audio->LoadFx("pinball/FlipperDown1.wav");
+	drain = App->audio->LoadFx("pinball/Drain1.wav");
 	//bouncers=App->textures->Load("pinball/")
 
 	//RECTS-------------------------
@@ -71,10 +75,28 @@ update_status ModulePlayer::Update()
 	{
 		App->scene_intro->leftflipper->body->ApplyAngularImpulse(-3.0f,true);
 	}
+	
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+	{
+		App->audio->PlayFx(flipperUp);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
+	{
+		App->audio->PlayFx(flipperDown);
+	}
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
 		App->scene_intro->rightflipper->body->ApplyAngularImpulse(3.0f, true);
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+	{
+		App->audio->PlayFx(flipperUp);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
+	{
+		App->audio->PlayFx(flipperDown);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && spring_control.y<=852 && Shoot==true && pause==false)
@@ -91,6 +113,7 @@ update_status ModulePlayer::Update()
 		force_counter = 0;
 		Shoot = false;
 		App->scene_intro->cannon_block->body->SetActive(false);
+		App->audio->PlayFx(drain);
 	}
 	
 	if (App->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
