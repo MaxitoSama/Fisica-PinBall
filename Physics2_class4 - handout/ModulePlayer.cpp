@@ -173,6 +173,16 @@ update_status ModulePlayer::Update()
 			App->scene_intro->i_passed = false;
 			App->scene_intro->n_passed = false;
 			App->scene_intro->millioncount = 0;
+
+			App->scene_intro->arrow1 = false;
+			App->scene_intro->arrow2 = false;
+			App->scene_intro->arrow3 = false;
+			App->scene_intro->arrow4 = false;
+			App->scene_intro->arrow5 = false;
+			App->scene_intro->arrow6 = false;
+			App->scene_intro->arrow7 = false;
+			App->scene_intro->arrow8 = false;
+			App->scene_intro->arrow9 = false;
 		}
 
 		restart = false;
@@ -211,6 +221,15 @@ void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (bodyA == Restart)
 		{
 			restart = true;
+			App->scene_intro->arrow1 = false;
+			App->scene_intro->arrow2 = false;
+			App->scene_intro->arrow3 = false;
+			App->scene_intro->arrow4 = false;
+			App->scene_intro->arrow5 = false;
+			App->scene_intro->arrow6 = false;
+			App->scene_intro->arrow7 = false;
+			App->scene_intro->arrow8 = false;
+			App->scene_intro->arrow9 = false;
 		}
 		if (bodyA == App->scene_intro->B_1sensor)
 		{
