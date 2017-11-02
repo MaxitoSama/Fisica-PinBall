@@ -31,7 +31,6 @@ bool ModulePlayer::Start()
 	drain = App->audio->LoadFx("sounds/Drain1.wav");
 	collisionfx = App->audio->LoadFx("sounds/BallCollision2.wav");
 
-	//bouncers=App->textures->Load("pinball/")
 
 	//RECTS-------------------------
 	spring_control = { 455,834,17,21 };
@@ -71,6 +70,7 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+	//Pause system---------------------------------------
 	if (SDL_GetTicks() >= ticks && pause == true)
 	{
 		pause = false;
@@ -82,6 +82,8 @@ update_status ModulePlayer::Update()
 		App->renderer->Blit(gameover, 30,300);
 	}
 
+	
+	//Game Controls--------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
 		App->scene_intro->leftflipper->body->ApplyAngularImpulse(-3.0f,true);
@@ -139,6 +141,8 @@ update_status ModulePlayer::Update()
 		Ball->body->SetTransform({ PIXEL_TO_METERS((float)i),  PIXEL_TO_METERS((float)j) }, 0.0f);
 	}
 
+	
+	//Restart method--------------------------------------------
 	if (App->scene_intro->slide_block->body)
 	{
 		App->renderer->Blit(blocker_texture, 251, 11);
@@ -156,7 +160,7 @@ update_status ModulePlayer::Update()
 			lives -= 1;
 		}
 
-		if(lives==0) //if we want to count from 2 to 0 then change this "if" for an "else"
+		if(lives==0) 
 		{
 			lives = 3;
 			Timer(4000);
@@ -179,6 +183,8 @@ update_status ModulePlayer::Update()
 		restart = false;
 	}
 
+
+	//Points------------------------------------------------
 	if (getpoints1 == true)
 	{
 		score += 100;
@@ -191,6 +197,7 @@ update_status ModulePlayer::Update()
 		getpoints2 = false;
 	}
 
+	//Blit everything---------------------------------------
 	int x, y;
 	Ball->GetPosition(x, y);
 

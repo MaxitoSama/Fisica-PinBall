@@ -32,298 +32,12 @@ bool ModulePhysics::Start()
 	world = new b2World(b2Vec2(GRAVITY_X, -GRAVITY_Y));
 	world->SetContactListener(this);
 
-
-	// needed to create joints like mouse joint
 	b2BodyDef bd;
 	ground = world->CreateBody(&bd);
 
-	//Bouncer1 = CreateCircle();
-	// big static circle as "ground" in the middle of the screen
 	int x = SCREEN_WIDTH / 2;
 	int y = SCREEN_HEIGHT / 1.5f;
 	int diameter = SCREEN_WIDTH / 2;
-	
-	int PinBall_Board[14] = {
-		477, 872,
-		507, 874,
-		507, 17,
-		25, 17,
-		27, 871,
-		467, 871,
-		477, 872
-	};
-
-	//CreateChain(-25, -17, PinBall_Board, 13, b2_staticBody, 0.0f);
-
-	int PinBall_Right_Part[64] = {
-		477, 872,
-		349, 872,
-		475, 788,
-		475, 618,
-		472, 607,
-		463, 597,
-		453, 587,
-		445, 576,
-		444, 565,
-		446, 557,
-		451, 548,
-		456, 543,
-		461, 536,
-		460, 527,
-		456, 500,
-		445, 466,
-		444, 456,
-		448, 447,
-		454, 440,
-		454, 431,
-		447, 422,
-		439, 414,
-		433, 400,
-		437, 378,
-		441, 357,
-		446, 332,
-		452, 303,
-		471, 217,
-		480, 188,
-		480, 344,
-		480, 643,
-		480, 873
-	};
-
-	CreateChain(-25, -17, PinBall_Right_Part, 63, b2_staticBody, 0.5f);
-
-	int Inside_2[98] = {
-		265, 48,
-		244, 48,
-		239, 49,
-		238, 54,
-		238, 97,
-		235, 113,
-		230, 117,
-		221, 120,
-		204, 123,
-		193, 125,
-		182, 129,
-		175, 137,
-		175, 147,
-		177, 154,
-		181, 158,
-		192, 160,
-		204, 162,
-		231, 167,
-		238, 179,
-		239, 230,
-		237, 235,
-		232, 238,
-		162, 262,
-		174, 325,
-		176, 330,
-		179, 334,
-		185, 336,
-		252, 360,
-		257, 361,
-		260, 361,
-		262, 360,
-		260, 355,
-		253, 346,
-		247, 337,
-		245, 331,
-		243, 323,
-		243, 201,
-		251, 184,
-		244, 180,
-		239, 173,
-		234, 163,
-		233, 151,
-		235, 142,
-		238, 133,
-		244, 129,
-		253, 123,
-		266, 122,
-		267, 55,
-		265, 48
-	};
-
-	CreateChain(0, 0, Inside_2, 97, b2_staticBody, 0.5f);
-
-	int Canon[12] = {
-		480, 855,
-		480, 130,
-		480, 854,
-		450, 854,
-		450, 179,
-		450, 854
-	};
-
-	CreateChain(0, 0, Canon, 12, b2_staticBody, 0.0f);
-
-	int left_slide[18] = {
-		33, 628,
-		38, 628,
-		39, 723,
-		139, 791,
-		132, 795,
-		40, 735,
-		34, 728,
-		33, 718,
-		33, 628
-	};
-
-	CreateChain(0, 0, left_slide, 17, b2_staticBody, 0.0f);
-
-	int rigth_sile[28] = {
-		317, 791,
-		325, 797,
-		414, 737,
-		419, 733,
-		422, 729,
-		423, 707,
-		423, 680,
-		423, 658,
-		423, 625,
-		420, 625,
-		420, 717,
-		415, 724,
-		403, 733,
-		317, 791
-	};
-
-	CreateChain(0, 0, rigth_sile, 27, b2_staticBody, 0.0f);
-
-	int canon_box[10] = {
-		480, 829,
-		451, 829,
-		451, 855,
-		480, 855,
-		480, 829
-	};
-
-	CreateChain(0, 0, canon_box, 9, b2_staticBody, 0.0f);
-
-	int left_small_block[32] = {
-		299, 228,
-		280, 317,
-		279, 323,
-		278, 326,
-		275, 326,
-		273, 323,
-		272, 319,
-		272, 234,
-		274, 229,
-		276, 227,
-		278, 225,
-		281, 224,
-		288, 224,
-		293, 224,
-		297, 224,
-		299, 228
-	};
-
-	CreateChain(0, 0, left_small_block, 31, b2_staticBody, 0.4f);
-
-	int right_small_block[14] = {
-		346, 249,
-		372, 276,
-		375, 281,
-		374, 285,
-		348, 355,
-		335, 351,
-		345, 248
-	};
-
-	CreateChain(0, 0, right_small_block, 13, b2_staticBody, 0.4f);
-
-	int long_block[46] = {
-		108, 357,
-		123, 352,
-		104, 179,
-		94, 82,
-		96, 66,
-		99, 57,
-		101, 54,
-		100, 51,
-		96, 51,
-		84, 59,
-		66, 72,
-		57, 82,
-		51, 91,
-		46, 102,
-		43, 112,
-		42, 128,
-		43, 149,
-		47, 172,
-		57, 210,
-		72, 254,
-		81, 280,
-		97, 328,
-		108, 358
-	};
-
-	CreateChain(0, 0, long_block, 45, b2_staticBody, 0.4f);
-
-	int right_long_block[76] = {
-		375, 195,
-		375, 202,
-		377, 210,
-		380, 215,
-		383, 228,
-		386, 239,
-		388, 242,
-		392, 241,
-		396, 223,
-		411, 186,
-		423, 153,
-		429, 133,
-		433, 119,
-		435, 106,
-		435, 94,
-		433, 79,
-		427, 64,
-		419, 55,
-		407, 46,
-		391, 39,
-		382, 40,
-		376, 43,
-		373, 51,
-		372, 64,
-		374, 75,
-		380, 82,
-		384, 91,
-		384, 101,
-		397, 109,
-		397, 120,
-		397, 131,
-		397, 150,
-		397, 167,
-		395, 175,
-		389, 181,
-		381, 187,
-		377, 190,
-		375, 195
-	};
-
-	CreateChain(0, 0, right_long_block, 75, b2_staticBody, 0.4f);
-
-	int tiny_block_1[18] = {
-		274, 97,
-		274, 78,
-		272, 74,
-		270, 74,
-		268, 76,
-		268, 98,
-		270, 100,
-		272, 100,
-		274, 97
-	};
-
-	CreateChain(0, 0, tiny_block_1, 17, b2_staticBody, 0.2f);
-
-	CreateChain(33, 0, tiny_block_1, 17, b2_staticBody, 0.2f);
-
-	CreateChain(67, 0, tiny_block_1, 17, b2_staticBody, 0.2f);
-
-	CreateChain(100, 0, tiny_block_1, 17, b2_staticBody, 0.2f);
-
 
 	return true;
 }
@@ -510,8 +224,7 @@ update_status ModulePhysics::PostUpdate()
 	mouse_position.x = PIXEL_TO_METERS(App->input->GetMouseX());
 	mouse_position.y = PIXEL_TO_METERS(App->input->GetMouseY());
 
-	// Bonus code: this will iterate all objects in the world and draw the circles
-	// You need to provide your own macro to translate meters to pixels
+	
 	for(b2Body* b = world->GetBodyList(); b; b = b->GetNext())
 	{
 		for(b2Fixture* f = b->GetFixtureList(); f; f = f->GetNext())
@@ -580,7 +293,6 @@ update_status ModulePhysics::PostUpdate()
 				break;
 			}
 
-			// TODO 1: If mouse button 1 is pressed ...
 			if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
 			{
 				if(f->TestPoint(mouse_position))
@@ -589,14 +301,10 @@ update_status ModulePhysics::PostUpdate()
 				}
 				
 			}
-			// test if the current body contains mouse position
 		}
 	}
 
-	// If a body was selected we will attach a mouse joint to it
-	// so we can pull it around
-	// TODO 2: If a body was selected, create a mouse joint
-	// using mouse_joint class property
+	
 	if (body_found != nullptr)
 	{
 		LOG("Creating Join");
@@ -612,13 +320,9 @@ update_status ModulePhysics::PostUpdate()
 	}
 
 
-	// TODO 3: If the player keeps pressing the mouse button, update
-	// target position and draw a red line between both anchor points
-
 	if (App->input->GetMouseButton(SDL_BUTTON_LEFT)==KEY_REPEAT && mouse_joint!=nullptr)
 	{
 		mouse_joint->SetTarget(mouse_position);
-		//App->renderer->DrawLine(mouse_position.x, mouse_position.y, body_found->GetPosition().x, body_found->GetPosition().y,255,0,0);
 	}
 	
 	if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP && mouse_joint != nullptr)
@@ -627,8 +331,6 @@ update_status ModulePhysics::PostUpdate()
 		mouse_joint = nullptr;
 		body_found = nullptr;
 	}
-
-	// TODO 4: If the player releases the mouse button, destroy the joint
 
 	return UPDATE_CONTINUE;
 }
@@ -690,7 +392,6 @@ int PhysBody::RayCast(int x1, int y1, int x2, int y2, float& normal_x, float& no
 	{
 		if(fixture->GetShape()->RayCast(&output, input, body->GetTransform(), 0) == true)
 		{
-			// do we want the normal ?
 
 			float fx = x2 - x1;
 			float fy = y2 - y1;
