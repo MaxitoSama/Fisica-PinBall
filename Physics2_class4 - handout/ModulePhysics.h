@@ -52,10 +52,11 @@ public:
 
 public:
 
-	b2World* world;
-	PhysBody* Bouncer1;
-	PhysBody* Bouncer2;
-	PhysBody* Bouncer3;
+	b2World*	world;
+	PhysBody*	Bouncer1;
+	PhysBody*	Bouncer2;
+	PhysBody*	Bouncer3;
+	PhysBody*	Chain1;
 
 private:
 

@@ -24,9 +24,12 @@ bool ModulePlayer::Start()
 	Spring = App->textures->Load("pinball/PinBall_Spring.png");
 	ball_texture = App->textures->Load("pinball/Ball.png");
 	blocker_texture = App->textures->Load("pinball/slide_blocker.png");
+	
 	flipperUp =App->audio->LoadFx("pinball/FlipperUp1.wav");
 	flipperDown = App->audio->LoadFx("pinball/FlipperDown1.wav");
 	drain = App->audio->LoadFx("pinball/Drain1.wav");
+	collisionfx = App->audio->LoadFx("pinball/BallCollision2.wav");
+
 	//bouncers=App->textures->Load("pinball/")
 
 	//RECTS-------------------------
@@ -40,6 +43,8 @@ bool ModulePlayer::Start()
 
 	//BODIES------------------------
 	Ball = App->physics->CreateCircle(455, 824, 11, b2_dynamicBody, 0.4f);
+	Ballfollower= App->physics->CreateCircle(455, 824, 12, b2_staticBody, 0.4f,true);
+	Ballfollower->listener = this;
 	
 	BallSensor= App->physics->CreateRectangleSensor(455 + 10, 834 + 5, 25, 21);
 	BallSensor->listener = this;
@@ -169,6 +174,8 @@ update_status ModulePlayer::Update()
 	int x, y;
 	Ball->GetPosition(x, y);
 
+	Ballfollower->body->SetTransform(Ball->body->GetWorldCenter(), 0.0f);
+
 	App->renderer->Blit(Spring, spring_control.x, spring_control.y);
 	App->renderer->Blit(ball_texture, x,y);
 
@@ -191,7 +198,12 @@ void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 			LOG("puntos");
 		}
+		if (bodyA == Ballfollower)
+		{
+			App->audio->PlayFx(collisionfx);
+		}
 	}
+	
 }
 
 void ModulePlayer::Timer(int time)

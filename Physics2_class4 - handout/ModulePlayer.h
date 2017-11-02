@@ -34,6 +34,7 @@ public:
 	SDL_Rect		spring_control;
 
 	PhysBody*		Ball;
+	PhysBody*		Ballfollower;
 	PhysBody*		BallSensor;
 	PhysBody*		Restart;
 
@@ -51,5 +52,6 @@ public:
 	uint			flipperDown;
 	uint			drain;
 	uint			target;
+	uint			collisionfx;
 
 };
