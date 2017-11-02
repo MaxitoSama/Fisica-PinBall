@@ -37,33 +37,33 @@ bool ModuleSceneIntro::Start()
 
 	//--------------------------Image sources------------------------------------------------
 
-	circle = App->textures->Load("pinball/wheel.png"); 
-	box = App->textures->Load("pinball/crate.png");
-	rick = App->textures->Load("pinball/rick_head.png");
-	BackGround= App->textures->Load("pinball/PinBall_Board2.png");
-	RightFlipper = App->textures->Load("pinball/right flipper.png");
-	LeftFlipper = App->textures->Load("pinball/left flipper.png");
-	RightBouncer = App->textures->Load("pinball/right block.png");
-	LeftBouncer = App->textures->Load("pinball/left block.png");
-	LetterW = App->textures->Load("pinball/w circle.png");
-	LetterI = App->textures->Load("pinball/i circle.png");
-	LetterN = App->textures->Load("pinball/n circle.png");
-	million_1 = App->textures->Load("pinball/1 million.png");
-	million_2 = App->textures->Load("pinball/2 million.png");
-	million_3 = App->textures->Load("pinball/3 million.png");
-	million_4 = App->textures->Load("pinball/4 million.png");
-	arrow1 = App->textures->Load("pinball/arrow1.png");
-	arrow2 = App->textures->Load("pinball/arrow2.png");
-	arrow3 = App->textures->Load("pinball/arrow3.png");
-	arrow4 = App->textures->Load("pinball/arrow4.png");
-	arrow5 = App->textures->Load("pinball/arrow5.png");
-	arrow6 = App->textures->Load("pinball/arrow6.png");
-	arrow7 = App->textures->Load("pinball/arrow7.png");
-	arrow8 = App->textures->Load("pinball/arrow8.png");
-	arrow9 = App->textures->Load("pinball/arrow9.png");
+	circle = App->textures->Load("assets/wheel.png"); 
+	box = App->textures->Load("assets/crate.png");
+	rick = App->textures->Load("assets/rick_head.png");
+	BackGround= App->textures->Load("assets/PinBall_Board2.png");
+	RightFlipper = App->textures->Load("assets/right flipper.png");
+	LeftFlipper = App->textures->Load("assets/left flipper.png");
+	RightBouncer = App->textures->Load("assets/right block.png");
+	LeftBouncer = App->textures->Load("assets/left block.png");
+	LetterW = App->textures->Load("assets/w circle.png");
+	LetterI = App->textures->Load("assets/i circle.png");
+	LetterN = App->textures->Load("assets/n circle.png");
+	million_1 = App->textures->Load("assets/1 million.png");
+	million_2 = App->textures->Load("assets/2 million.png");
+	million_3 = App->textures->Load("assets/3 million.png");
+	million_4 = App->textures->Load("assets/4 million.png");
+	arrow1 = App->textures->Load("assets/arrow1.png");
+	arrow2 = App->textures->Load("assets/arrow2.png");
+	arrow3 = App->textures->Load("assets/arrow3.png");
+	arrow4 = App->textures->Load("assets/arrow4.png");
+	arrow5 = App->textures->Load("assets/arrow5.png");
+	arrow6 = App->textures->Load("assets/arrow6.png");
+	arrow7 = App->textures->Load("assets/arrow7.png");
+	arrow8 = App->textures->Load("assets/arrow8.png");
+	arrow9 = App->textures->Load("assets/arrow9.png");
 
-	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
-	click = App->audio->LoadFx("pinball/Target2.wav");
+	bonus_fx = App->audio->LoadFx("sounds/bonus.wav");
+	click = App->audio->LoadFx("sounds/Target2.wav");
 
 	//sensor = App->physics->CreateRectangleSensor(455+10, 834+5, 25, 21);
 
