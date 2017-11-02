@@ -30,6 +30,7 @@ public:
 	SDL_Texture*	ball_texture;
 	SDL_Texture*	blocker_texture;
 	SDL_Texture*	bouncers;
+	SDL_Texture*	gameover;
 	
 	SDL_Rect		spring_control;
 

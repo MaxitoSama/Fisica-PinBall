@@ -53,7 +53,8 @@ public:
 	PhysBody*			B_2sensor;
 	PhysBody*			B_3sensor;
 
-	PhysBody*			Million;
+	PhysBody*			Millionstart;
+	PhysBody*			Millionend;
 
 	PhysBody*			switch_1;
 	PhysBody*			switch_2;
@@ -119,6 +120,6 @@ public:
 	bool				give3m;
 	bool				give4m;
 
-	int					counter;
+	int					millioncount;
 
 };

@@ -24,6 +24,7 @@ bool ModulePlayer::Start()
 	Spring = App->textures->Load("pinball/PinBall_Spring.png");
 	ball_texture = App->textures->Load("pinball/Ball.png");
 	blocker_texture = App->textures->Load("pinball/slide_blocker.png");
+	gameover = App->textures->Load("pinball/Game_over.png");
 	
 	flipperUp =App->audio->LoadFx("pinball/FlipperUp1.wav");
 	flipperDown = App->audio->LoadFx("pinball/FlipperDown1.wav");
@@ -73,6 +74,12 @@ update_status ModulePlayer::Update()
 	if (SDL_GetTicks() >= ticks && pause == true)
 	{
 		pause = false;
+		score = 0;
+	}
+	
+	if (pause == true)
+	{
+		App->renderer->Blit(gameover, 30,300);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
@@ -103,21 +110,26 @@ update_status ModulePlayer::Update()
 		App->audio->PlayFx(flipperDown);
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && spring_control.y<=852 && Shoot==true && pause==false)
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && spring_control.y<=852 )
 	{
 		spring_control.y += 1;
 		force_counter += 1;
 	}
 	
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP && Shoot==true && pause==false)
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP)
 	{
-		float force= ((float)force_counter * 25)/3;
 		spring_control.y = 834;
-		Ball->body->ApplyForce({ 0,-force}, Ball->body->GetLocalCenter(), true);
-		force_counter = 0;
-		Shoot = false;
-		App->scene_intro->cannon_block->body->SetActive(false);
 		App->audio->PlayFx(drain);
+		
+		if (Shoot == true && pause == false)
+		{
+			float force = ((float)force_counter * 25) / 3;
+			Ball->body->ApplyForce({ 0,-force }, Ball->body->GetLocalCenter(), true);
+			Shoot = false;
+			App->scene_intro->cannon_block->body->SetActive(false);
+		}
+		
+		force_counter = 0;
 	}
 	
 	if (App->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
@@ -151,17 +163,16 @@ update_status ModulePlayer::Update()
 		if (lives > 0)
 		{
 			lives -= 1;
-			Timer(1000);
 		}
 
 		if(lives==0) //if we want to count from 2 to 0 then change this "if" for an "else"
 		{
 			lives = 3;
-			score = 0;
-			Timer(2000);
+			Timer(4000);
 			App->scene_intro->w_passed = false;
 			App->scene_intro->i_passed = false;
 			App->scene_intro->n_passed = false;
+			App->scene_intro->millioncount = 0;
 		}
 
 		restart = false;
@@ -179,12 +190,10 @@ update_status ModulePlayer::Update()
 		getpoints2 = false;
 	}
 
-
 	int x, y;
 	Ball->GetPosition(x, y);
 
 	
-
 	App->renderer->Blit(Spring, spring_control.x, spring_control.y);
 	App->renderer->Blit(ball_texture, x,y);
 

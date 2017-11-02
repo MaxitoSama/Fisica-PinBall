@@ -115,10 +115,12 @@ bool ModuleSceneIntro::Start()
 	
 	canon_sensor = App->physics->CreateRectangleSensor(17, 845, 30, 30);
 	canon_sensor->listener = this;
+	
+	Millionstart = App->physics->CreateRectangleSensor(170, 120, 35, 1);;
+	Millionstart->listener = this;
 
-	Million = new PhysBody();
-	Million = App->physics->CreateRectangleSensor(220, 220, 35, 1);
-	Million->listener = this;
+	Millionend = App->physics->CreateRectangleSensor(220, 220, 35, 1);
+	Millionend->listener = this;
 	
 	int left_block[22] = {
 		11, 16,
@@ -315,6 +317,8 @@ bool ModuleSceneIntro::Start()
 
 	Chain1 = App->physics->CreateChain(0, 0, Inside_1, 219, b2_staticBody, 0.5f);
 
+	millioncount = 0;
+
 	return ret;
 }
 
@@ -354,28 +358,26 @@ update_status ModuleSceneIntro::Update()
 		n_passed = false;
 	}
 
-	if (million1 == true)
+	if (millioncount>=1)
 	{
 		App->renderer->Blit(million_1, 165, 248, NULL);
-		if (give1m == true)
-		{
-			App->player->score += 1000000;
-			give1m = false;
-		}
+	
 	}
 	
-	if (million2 == true)
+	if (millioncount >= 2)
 	{
 		App->renderer->Blit(million_2, 170, 266, NULL);
-		if (give2m == true)
-		{
-			App->player->score += 2000000;
-			give2m = false;
-		}
 	}
 	
-	//App->renderer->Blit(million_3, 172, 285, NULL);
-	//App->renderer->Blit(million_4, 172, 305, NULL);
+	if (millioncount >= 3)
+	{
+		App->renderer->Blit(million_3, 172, 285, NULL);
+	}
+	
+	if (millioncount >= 4)
+	{
+		App->renderer->Blit(million_4, 172, 305, NULL);
+	}
 
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
@@ -591,6 +593,17 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(arrow1, 55, 432);
 	}
 
+	if (million1 == true && million2 == true)
+	{
+		million1 = false;
+		million2 = false;
+		if (millioncount < 4)
+		{
+			millioncount += 1;
+			App->player->score += 1000000 * millioncount;
+		}
+	}
+
 	char score[64];
 	char lives[4];
 	char Title[64] = "PinBall Score: ";
@@ -631,16 +644,14 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			n_passed = true;
 		}
 
-		if (bodyA == Million && million1 != true)
+		if (bodyA == Millionstart && million1 != true)
 		{
 			million1 = true;
-			give1m = true;
 		}
 
-		if (bodyA == Million && million1 == true && million2 != true)
+		if (bodyA == Millionend && million1 == true && million2 != true)
 		{
 			million2 = true;
-			give2m = true;
 		}
 		
 
