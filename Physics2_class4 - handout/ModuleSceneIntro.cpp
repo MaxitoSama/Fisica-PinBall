@@ -675,7 +675,6 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (App->player->getpoints2==false &&(bodyA == LbouncerSensor || bodyB == RbouncerSensor))
 		{
 			App->audio->PlayFx(bonus_fx);
-			LOG("puntos");
 			App->player->getpoints2 = true;
 		}
 	}
