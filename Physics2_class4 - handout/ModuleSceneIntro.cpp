@@ -144,7 +144,9 @@ bool ModuleSceneIntro::Start()
 	};
 	
 	App->physics->CreateChain(0, 0, left_block_bouncer, 9, b2_staticBody, 1.6f);
-
+	
+	LbouncerSensor= App->physics->CreateChainSensor(-1, 0, left_block_bouncer, 9);
+	LbouncerSensor->listener = this;
 
 	int right_block[20] = {
 		61, 10,
@@ -170,6 +172,9 @@ bool ModuleSceneIntro::Start()
 	};
 	
 	App->physics->CreateChain(0, 0, right_block_bouncer, 9, b2_staticBody, 1.6f);
+	
+	RbouncerSensor = App->physics->CreateChainSensor(1, 0, right_block_bouncer, 9);
+	RbouncerSensor->listener = this;
 	
 	//----------------------------------------------------------------------------------------
 	
@@ -589,11 +594,10 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			give2m = true;
 		}
 
-		if (App->player->getpoints==false && (bodyA == B_1sensor || bodyA == B_2sensor || bodyA == B_3sensor))
+		if (App->player->getpoints1==false && (bodyA == B_1sensor || bodyA == B_2sensor || bodyA == B_3sensor))
 		{
 			App->audio->PlayFx(bonus_fx);
-			LOG("puntos");
-			App->player->getpoints = true;
+			App->player->getpoints1 = true;
 		}
 
 		if (bodyA == canon_sensor && canon_shoot == false && App->player->Ball->body->GetLinearVelocity()==stop)
@@ -601,10 +605,18 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			canon_shoot = true;
 			Timer(1000);
 		}
+
 		if (bodyA == switch_1 || bodyA == switch_2 || bodyA == switch_3 || bodyA == switch_4 || bodyA == switch_5
 			|| bodyA == switch_6 || bodyA == switch_7 || bodyA == switch_8 || bodyA == switch_9)
 		{
 			App->audio->PlayFx(click);
+		}
+
+		if (App->player->getpoints2==false &&(bodyA == LbouncerSensor || bodyB == RbouncerSensor))
+		{
+			App->audio->PlayFx(bonus_fx);
+			LOG("puntos");
+			App->player->getpoints1 = true;
 		}
 	}
 

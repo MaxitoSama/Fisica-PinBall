@@ -40,7 +40,8 @@ public:
 
 	bool			Shoot;
 	bool			restart;
-	bool			getpoints;
+	bool			getpoints1;
+	bool			getpoints2;
 	bool			pause;
 
 	uint			force_counter;

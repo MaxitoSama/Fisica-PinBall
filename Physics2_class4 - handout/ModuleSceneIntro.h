@@ -44,6 +44,8 @@ public:
 	PhysBody*			Chain1;
 
 	PhysBody*			canon_sensor;
+	PhysBody*			LbouncerSensor;
+	PhysBody*			RbouncerSensor;
 	PhysBody*			sensorblocker_w;
 	PhysBody*			sensorblocker_i;
 	PhysBody*			sensorblocker_n;

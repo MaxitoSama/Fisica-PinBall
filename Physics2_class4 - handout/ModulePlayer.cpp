@@ -38,7 +38,8 @@ bool ModulePlayer::Start()
 	//BOOLS-------------------------
 	Shoot = false;
 	restart = false;
-	getpoints = false;
+	getpoints1 = false;
+	getpoints2 = false;
 	pause = false;
 
 	//BODIES------------------------
@@ -168,10 +169,16 @@ update_status ModulePlayer::Update()
 		restart = false;
 	}
 
-	if (getpoints == true)
+	if (getpoints1 == true)
 	{
 		score += 100;
-		getpoints = false;
+		getpoints1 = false;
+	}
+	
+	if (getpoints2 == true)
+	{
+		score += 10000;
+		getpoints2 = false;
 	}
 
 
