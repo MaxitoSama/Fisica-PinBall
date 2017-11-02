@@ -221,15 +221,15 @@ void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (bodyA == Restart)
 		{
 			restart = true;
-			App->scene_intro->arrow1 = false;
-			App->scene_intro->arrow2 = false;
-			App->scene_intro->arrow3 = false;
-			App->scene_intro->arrow4 = false;
-			App->scene_intro->arrow5 = false;
-			App->scene_intro->arrow6 = false;
-			App->scene_intro->arrow7 = false;
-			App->scene_intro->arrow8 = false;
-			App->scene_intro->arrow9 = false;
+			App->scene_intro->arrow_1 = false;
+			App->scene_intro->arrow_2 = false;
+			App->scene_intro->arrow_3 = false;
+			App->scene_intro->arrow_4 = false;
+			App->scene_intro->arrow_5 = false;
+			App->scene_intro->arrow_6 = false;
+			App->scene_intro->arrow_7 = false;
+			App->scene_intro->arrow_8 = false;
+			App->scene_intro->arrow_9 = false;
 		}
 		if (bodyA == App->scene_intro->B_1sensor)
 		{
