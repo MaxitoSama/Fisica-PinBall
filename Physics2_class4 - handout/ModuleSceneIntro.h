@@ -41,6 +41,7 @@ public:
 	PhysBody*			bouncer_3;
 	PhysBody*			slide_block;
 	PhysBody*			cannon_block;
+	PhysBody*			Chain1;
 
 	PhysBody*			canon_sensor;
 	PhysBody*			sensorblocker_w;
@@ -49,7 +50,19 @@ public:
 	PhysBody*			B_1sensor;
 	PhysBody*			B_2sensor;
 	PhysBody*			B_3sensor;
+
 	PhysBody*			Million;
+
+	PhysBody*			switch_1;
+	PhysBody*			switch_2;
+	PhysBody*			switch_3;
+	PhysBody*			switch_4;
+	PhysBody*			switch_5;
+	PhysBody*			switch_6;
+	PhysBody*			switch_7;
+	PhysBody*			switch_8;
+	PhysBody*			switch_9;
+
 
 	bool				open;
 
@@ -74,6 +87,7 @@ public:
 
 	uint				bonus_fx;
 	uint				ticks;
+	uint				click;
 	
 	p2Point<int>		ray;
 	
@@ -81,6 +95,7 @@ public:
 	bool				w_passed;
 	bool				i_passed;
 	bool				n_passed;
+
 
 	bool				million1;
 	bool				million2;
@@ -91,4 +106,5 @@ public:
 	bool				give2m;
 	bool				give3m;
 	bool				give4m;
+
 };
