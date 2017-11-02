@@ -107,4 +107,6 @@ public:
 	bool				give3m;
 	bool				give4m;
 
+	int					counter;
+
 };

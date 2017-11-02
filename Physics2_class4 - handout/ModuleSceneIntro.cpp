@@ -350,21 +350,26 @@ update_status ModuleSceneIntro::Update()
 
 	if (million1 == true)
 	{
-		App->renderer->Blit(million_1, 160, 250, NULL);
+		App->renderer->Blit(million_1, 165, 248, NULL);
 		if (give1m == true)
 		{
 			App->player->score += 1000000;
 			give1m = false;
 		}
 	}
+	
 	if (million2 == true)
 	{
+		App->renderer->Blit(million_2, 170, 266, NULL);
 		if (give2m == true)
 		{
 			App->player->score += 2000000;
 			give2m = false;
 		}
 	}
+	
+	//App->renderer->Blit(million_3, 172, 285, NULL);
+	//App->renderer->Blit(million_4, 172, 305, NULL);
 
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
@@ -583,11 +588,13 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			million1 = true;
 			give1m = true;
 		}
-		if (bodyA == Million && million1 == true && million2 != true && give1m == false)
+
+		if (bodyA == Million && million1 == true && million2 != true)
 		{
 			million2 = true;
 			give2m = true;
 		}
+		
 
 		if (App->player->getpoints==false && (bodyA == B_1sensor || bodyA == B_2sensor || bodyA == B_3sensor))
 		{
