@@ -40,7 +40,7 @@ bool ModuleSceneIntro::Start()
 	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
-	BackGround= App->textures->Load("pinball/PinBall_Board.png");
+	BackGround= App->textures->Load("pinball/PinBall_Board2.png");
 	RightFlipper = App->textures->Load("pinball/right flipper.png");
 	LeftFlipper = App->textures->Load("pinball/left flipper.png");
 	RightBouncer = App->textures->Load("pinball/right block.png");
