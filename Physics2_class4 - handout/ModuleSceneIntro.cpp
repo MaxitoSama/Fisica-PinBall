@@ -64,7 +64,7 @@ bool ModuleSceneIntro::Start()
 
 	bonus_fx = App->audio->LoadFx("sounds/bonus.wav");
 	click = App->audio->LoadFx("sounds/Target2.wav");
-	App->audio->PlayMusic("sounds/Pinball Music.ogg", 2.0f);
+	App->audio->PlayMusic("sounds/music.ogg");
 	//sensor = App->physics->CreateRectangleSensor(455+10, 834+5, 25, 21);
 
 
@@ -91,17 +91,17 @@ bool ModuleSceneIntro::Start()
 	switch_9->listener = this;
 
 	bouncer_1 = new PhysBody();
-	bouncer_1 = App->physics->CreateCircle(267, 155, 22, b2_staticBody, 2.0f);
+	bouncer_1 = App->physics->CreateCircle(267, 155, 22, b2_staticBody, 1.7f);
 	B_1sensor = App->physics->CreateCircle(267, 155, 24, b2_staticBody, 2.0f,true);
 	B_1sensor->listener = this;
 	
 	bouncer_2 = new PhysBody();
-	bouncer_2 = App->physics->CreateCircle(370, 162, 22, b2_staticBody, 2.0f);
+	bouncer_2 = App->physics->CreateCircle(370, 162, 22, b2_staticBody, 1.7f);
 	B_2sensor = App->physics->CreateCircle(370, 162, 24, b2_staticBody, 2.0f, true);
 	B_2sensor->listener = this;
 	
 	bouncer_3 = new PhysBody();
-	bouncer_3 = App->physics->CreateCircle(306, 223, 22, b2_staticBody, 2.0f);
+	bouncer_3 = App->physics->CreateCircle(306, 223, 22, b2_staticBody, 1.3f);
 	B_3sensor = App->physics->CreateCircle(306, 223, 24, b2_staticBody, 2.0f, true);
 	B_3sensor->listener = this;
 
