@@ -44,7 +44,7 @@ bool ModulePlayer::Start()
 	pause = false;
 
 	//BODIES------------------------
-	Ball = App->physics->CreateCircle(455, 824, 11, b2_dynamicBody, 0.2f);
+	Ball = App->physics->CreateCircle(455, 824, 11, b2_dynamicBody, 0.1f);
 
 	BallSensor= App->physics->CreateRectangleSensor(455 + 10, 834 + 5, 25, 21);
 	BallSensor->listener = this;
@@ -137,15 +137,6 @@ update_status ModulePlayer::Update()
 		int i, j;
 		SDL_GetMouseState(&i, &j);
 		Ball->body->SetTransform({ PIXEL_TO_METERS((float)i),  PIXEL_TO_METERS((float)j) }, 0.0f);
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
-	{
-		Ball->body->SetTransform({ PIXEL_TO_METERS(455+0.2f), PIXEL_TO_METERS(824-0.1f) }, 0.0f);
-		Ball->body->SetLinearVelocity({ 0,0 });
-		lives = 3;
-		score = 0;
-		restart = false;
 	}
 
 	if (App->scene_intro->slide_block->body)
