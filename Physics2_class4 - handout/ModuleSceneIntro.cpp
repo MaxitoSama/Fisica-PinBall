@@ -49,6 +49,10 @@ bool ModuleSceneIntro::Start()
 	LetterW = App->textures->Load("pinball/w circle.png");
 	LetterI = App->textures->Load("pinball/i circle.png");
 	LetterN = App->textures->Load("pinball/n circle.png");
+	million_1 = App->textures->Load("pinball/1 million.png");
+	million_2 = App->textures->Load("pinball/2 million.png");
+	million_3 = App->textures->Load("pinball/3 million.png");
+	million_4 = App->textures->Load("pinball/4 million.png");
 
 	//sensor = App->physics->CreateRectangleSensor(455+10, 834+5, 25, 21);
 
@@ -75,19 +79,23 @@ bool ModuleSceneIntro::Start()
 	cannon_block->body->SetTransform(cannon_block->body->GetWorldCenter(), -78 * 0.0174532925);
 
 	sensorblocker_w = new PhysBody();
-	sensorblocker_w = App->physics->CreateRectangleSensor(290, 110, 20, 1);
+	sensorblocker_w = App->physics->CreateRectangleSensor(290, 90, 20, 1);
 	sensorblocker_w->listener = this;
 
 	sensorblocker_i = new PhysBody();
-	sensorblocker_i = App->physics->CreateRectangleSensor(323, 110, 20, 1);
+	sensorblocker_i = App->physics->CreateRectangleSensor(323, 90, 20, 1);
 	sensorblocker_i->listener = this;
 
 	sensorblocker_n = new PhysBody();
-	sensorblocker_n = App->physics->CreateRectangleSensor(356, 110, 20, 1);
+	sensorblocker_n = App->physics->CreateRectangleSensor(356, 90, 20, 1);
 	sensorblocker_n->listener = this;
 	
 	canon_sensor = App->physics->CreateRectangleSensor(17, 845, 30, 30);
 	canon_sensor->listener = this;
+
+	Million = new PhysBody();
+	Million = App->physics->CreateRectangleSensor(220, 220, 35, 1);
+	Million->listener = this;
 	
 	int left_block[22] = {
 		11, 16,
@@ -199,8 +207,26 @@ update_status ModuleSceneIntro::Update()
 	{
 		App->player->score += 100000;
 		w_passed = false;
-		i_passed == false;
-		n_passed == false;
+		i_passed = false;
+		n_passed = false;
+	}
+
+	if (million1 == true)
+	{
+		App->renderer->Blit(million_1, 160, 250, NULL);
+		if (give1m == true)
+		{
+			App->player->score += 1000000;
+			give1m = false;
+		}
+	}
+	if (million2 == true)
+	{
+		if (give2m == true)
+		{
+			App->player->score += 2000000;
+			give2m = false;
+		}
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
@@ -413,6 +439,17 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (bodyA == sensorblocker_n)
 		{
 			n_passed = true;
+		}
+
+		if (bodyA == Million && million1 != true)
+		{
+			million1 = true;
+			give1m = true;
+		}
+		if (bodyA == Million && million1 == true && million2 != true && give1m == false)
+		{
+			million2 = true;
+			give2m = true;
 		}
 
 		if (App->player->getpoints==false && (bodyA == B_1sensor || bodyA == B_2sensor || bodyA == B_3sensor))

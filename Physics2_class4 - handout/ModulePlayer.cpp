@@ -142,6 +142,7 @@ update_status ModulePlayer::Update()
 		Ball->body->SetTransform({ PIXEL_TO_METERS(455+0.2f), PIXEL_TO_METERS(824-0.2f) }, 0.0f);
 		Ball->body->SetLinearVelocity({ 0,0 });
 		App->scene_intro->slide_block = App->physics->CreateRectangle(253, 26, 5, 31, b2_staticBody);
+		App->scene_intro->open = false;
 		
 		if (lives > 0)
 		{
@@ -154,6 +155,9 @@ update_status ModulePlayer::Update()
 			lives = 3;
 			score = 0;
 			Timer(2000);
+			App->scene_intro->w_passed = false;
+			App->scene_intro->i_passed = false;
+			App->scene_intro->n_passed = false;
 		}
 
 		restart = false;

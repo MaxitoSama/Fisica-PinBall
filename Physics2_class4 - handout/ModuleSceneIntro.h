@@ -49,6 +49,7 @@ public:
 	PhysBody*			B_1sensor;
 	PhysBody*			B_2sensor;
 	PhysBody*			B_3sensor;
+	PhysBody*			Million;
 
 	bool				open;
 
@@ -66,6 +67,10 @@ public:
 	SDL_Texture*		LetterW;
 	SDL_Texture*		LetterI;
 	SDL_Texture*		LetterN;
+	SDL_Texture*		million_1;
+	SDL_Texture*		million_2;
+	SDL_Texture*		million_3;
+	SDL_Texture*		million_4;
 
 	uint				bonus_fx;
 	uint				ticks;
@@ -76,4 +81,14 @@ public:
 	bool				w_passed;
 	bool				i_passed;
 	bool				n_passed;
+
+	bool				million1;
+	bool				million2;
+	bool				million3;
+	bool				million4;
+
+	bool				give1m;
+	bool				give2m;
+	bool				give3m;
+	bool				give4m;
 };
