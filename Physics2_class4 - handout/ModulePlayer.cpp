@@ -21,15 +21,15 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 
 	//TEXTURES----------------------
-	Spring = App->textures->Load("pinball/PinBall_Spring.png");
-	ball_texture = App->textures->Load("pinball/Ball.png");
-	blocker_texture = App->textures->Load("pinball/slide_blocker.png");
-	gameover = App->textures->Load("pinball/Game_over.png");
+	Spring = App->textures->Load("assets/PinBall_Spring.png");
+	ball_texture = App->textures->Load("assets/Ball.png");
+	blocker_texture = App->textures->Load("assets/slide_blocker.png");
+	gameover = App->textures->Load("assets/Game_over.png");
 	
-	flipperUp =App->audio->LoadFx("pinball/FlipperUp1.wav");
-	flipperDown = App->audio->LoadFx("pinball/FlipperDown1.wav");
-	drain = App->audio->LoadFx("pinball/Drain1.wav");
-	collisionfx = App->audio->LoadFx("pinball/BallCollision2.wav");
+	flipperUp =App->audio->LoadFx("sounds/FlipperUp1.wav");
+	flipperDown = App->audio->LoadFx("sounds/FlipperDown1.wav");
+	drain = App->audio->LoadFx("sounds/Drain1.wav");
+	collisionfx = App->audio->LoadFx("sounds/BallCollision2.wav");
 
 	//bouncers=App->textures->Load("pinball/")
 
