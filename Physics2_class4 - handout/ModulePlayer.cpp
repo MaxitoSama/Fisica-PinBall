@@ -44,7 +44,7 @@ bool ModulePlayer::Start()
 	pause = false;
 
 	//BODIES------------------------
-	Ball = App->physics->CreateCircle(455, 824, 11, b2_dynamicBody, 0.4f);
+	Ball = App->physics->CreateCircle(455, 824, 11, b2_dynamicBody, 0.2f);
 
 	BallSensor= App->physics->CreateRectangleSensor(455 + 10, 834 + 5, 25, 21);
 	BallSensor->listener = this;

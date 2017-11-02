@@ -64,7 +64,7 @@ bool ModuleSceneIntro::Start()
 
 	bonus_fx = App->audio->LoadFx("sounds/bonus.wav");
 	click = App->audio->LoadFx("sounds/Target2.wav");
-
+	App->audio->PlayMusic("sounds/Pinball Music.ogg", 2.0f);
 	//sensor = App->physics->CreateRectangleSensor(455+10, 834+5, 25, 21);
 
 
@@ -342,6 +342,7 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update()
 {
 	App->renderer->Blit(BackGround, 0, 0, NULL);
+	
 	
 	if (w_passed == true)
 	{
