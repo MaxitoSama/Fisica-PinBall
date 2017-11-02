@@ -44,6 +44,8 @@ public:
 	PhysBody*			Chain1;
 
 	PhysBody*			canon_sensor;
+	PhysBody*			LbouncerSensor;
+	PhysBody*			RbouncerSensor;
 	PhysBody*			sensorblocker_w;
 	PhysBody*			sensorblocker_i;
 	PhysBody*			sensorblocker_n;
@@ -84,6 +86,7 @@ public:
 	SDL_Texture*		million_2;
 	SDL_Texture*		million_3;
 	SDL_Texture*		million_4;
+	SDL_Texture*		arrow1;
 
 	uint				bonus_fx;
 	uint				ticks;
@@ -96,6 +99,15 @@ public:
 	bool				i_passed;
 	bool				n_passed;
 
+	bool				arrow_1;
+	bool				arrow_2;
+	bool				arrow_3;
+	bool				arrow_4;
+	bool				arrow_5;
+	bool				arrow_6;
+	bool				arrow_7;
+	bool				arrow_8;
+	bool				arrow_9;
 
 	bool				million1;
 	bool				million2;

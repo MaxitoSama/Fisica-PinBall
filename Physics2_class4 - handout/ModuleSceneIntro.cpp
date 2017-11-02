@@ -52,6 +52,7 @@ bool ModuleSceneIntro::Start()
 	million_2 = App->textures->Load("pinball/2 million.png");
 	million_3 = App->textures->Load("pinball/3 million.png");
 	million_4 = App->textures->Load("pinball/4 million.png");
+	arrow1 = App->textures->Load("pinball/arrow.png");
 
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	click = App->audio->LoadFx("pinball/Target2.wav");
@@ -144,7 +145,9 @@ bool ModuleSceneIntro::Start()
 	};
 	
 	App->physics->CreateChain(0, 0, left_block_bouncer, 9, b2_staticBody, 1.6f);
-
+	
+	LbouncerSensor= App->physics->CreateChainSensor(-2, 0, left_block_bouncer, 9);
+	LbouncerSensor->listener = this;
 
 	int right_block[20] = {
 		61, 10,
@@ -170,6 +173,9 @@ bool ModuleSceneIntro::Start()
 	};
 	
 	App->physics->CreateChain(0, 0, right_block_bouncer, 9, b2_staticBody, 1.6f);
+	
+	RbouncerSensor = App->physics->CreateChainSensor(2, 0, right_block_bouncer, 9);
+	RbouncerSensor->listener = this;
 	
 	//----------------------------------------------------------------------------------------
 	
@@ -543,6 +549,48 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 
+	if (arrow_1 == true)
+	{
+		App->renderer->Blit(arrow1,29,481);
+	}
+
+	if (arrow_2 == true)
+	{
+		App->renderer->Blit(arrow1, 42, 456);
+	}
+
+	if (arrow_3 == true)
+	{
+		App->renderer->Blit(arrow1, 55, 432);
+	}
+
+	if (arrow_4 == true)
+	{
+		App->renderer->Blit(arrow1, 55, 432);
+	}
+
+	if (arrow_5 == true)
+	{
+		App->renderer->Blit(arrow1, 55, 432);
+	}
+
+	if (arrow_6 == true)
+	{
+		App->renderer->Blit(arrow1, 55, 432);
+	}
+	if (arrow_7 == true)
+	{
+		App->renderer->Blit(arrow1, 55, 432);
+	}
+	if (arrow_8 == true)
+	{
+		App->renderer->Blit(arrow1, 55, 432);
+	}
+	if (arrow_9 == true)
+	{
+		App->renderer->Blit(arrow1, 55, 432);
+	}
+
 	char score[64];
 	char lives[4];
 	char Title[64] = "PinBall Score: ";
@@ -596,11 +644,10 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		}
 		
 
-		if (App->player->getpoints==false && (bodyA == B_1sensor || bodyA == B_2sensor || bodyA == B_3sensor))
+		if (App->player->getpoints1==false && (bodyA == B_1sensor || bodyA == B_2sensor || bodyA == B_3sensor))
 		{
 			App->audio->PlayFx(bonus_fx);
-			LOG("puntos");
-			App->player->getpoints = true;
+			App->player->getpoints1 = true;
 		}
 
 		if (bodyA == canon_sensor && canon_shoot == false && App->player->Ball->body->GetLinearVelocity()==stop)
@@ -608,10 +655,61 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			canon_shoot = true;
 			Timer(1000);
 		}
+
 		if (bodyA == switch_1 || bodyA == switch_2 || bodyA == switch_3 || bodyA == switch_4 || bodyA == switch_5
 			|| bodyA == switch_6 || bodyA == switch_7 || bodyA == switch_8 || bodyA == switch_9)
 		{
 			App->audio->PlayFx(click);
+
+			if (bodyA == switch_1)
+			{
+				arrow_1 = true;
+			}
+
+			if (bodyA == switch_2)
+			{
+				arrow_2 = true;
+			}
+
+			if (bodyA == switch_3)
+			{
+				arrow_3 = true;
+			}
+
+			if (bodyA == switch_4)
+			{
+				arrow_4 = true;
+			}
+
+			if (bodyA == switch_5)
+			{
+				arrow_5 = true;
+			}
+
+			if (bodyA == switch_6)
+			{
+				arrow_6 = true;
+			}
+			if (bodyA == switch_7)
+			{
+				arrow_7 = true;
+			}
+			if (bodyA == switch_8)
+			{
+				arrow_8 = true;
+			}
+			if (bodyA == switch_9)
+			{
+				arrow_9 = true;
+			}
+			
+		}
+
+		if (App->player->getpoints2==false &&(bodyA == LbouncerSensor || bodyB == RbouncerSensor))
+		{
+			App->audio->PlayFx(bonus_fx);
+			LOG("puntos");
+			App->player->getpoints2 = true;
 		}
 	}
 

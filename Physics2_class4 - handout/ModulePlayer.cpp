@@ -38,14 +38,13 @@ bool ModulePlayer::Start()
 	//BOOLS-------------------------
 	Shoot = false;
 	restart = false;
-	getpoints = false;
+	getpoints1 = false;
+	getpoints2 = false;
 	pause = false;
 
 	//BODIES------------------------
 	Ball = App->physics->CreateCircle(455, 824, 11, b2_dynamicBody, 0.4f);
-	Ballfollower= App->physics->CreateCircle(455, 824, 12, b2_staticBody, 0.4f,true);
-	Ballfollower->listener = this;
-	
+
 	BallSensor= App->physics->CreateRectangleSensor(455 + 10, 834 + 5, 25, 21);
 	BallSensor->listener = this;
 
@@ -168,17 +167,23 @@ update_status ModulePlayer::Update()
 		restart = false;
 	}
 
-	if (getpoints == true)
+	if (getpoints1 == true)
 	{
 		score += 100;
-		getpoints = false;
+		getpoints1 = false;
+	}
+	
+	if (getpoints2 == true)
+	{
+		score += 10000;
+		getpoints2 = false;
 	}
 
 
 	int x, y;
 	Ball->GetPosition(x, y);
 
-	Ballfollower->body->SetTransform(Ball->body->GetWorldCenter(), 0.0f);
+	
 
 	App->renderer->Blit(Spring, spring_control.x, spring_control.y);
 	App->renderer->Blit(ball_texture, x,y);
@@ -201,10 +206,6 @@ void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (bodyA == App->scene_intro->B_1sensor)
 		{
 			LOG("puntos");
-		}
-		if (bodyA == Ballfollower)
-		{
-			App->audio->PlayFx(collisionfx);
 		}
 	}
 	
