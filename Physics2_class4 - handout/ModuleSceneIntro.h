@@ -88,6 +88,14 @@ public:
 	SDL_Texture*		million_3;
 	SDL_Texture*		million_4;
 	SDL_Texture*		arrow1;
+	SDL_Texture*		arrow2;
+	SDL_Texture*		arrow3;
+	SDL_Texture*		arrow4;
+	SDL_Texture*		arrow5;
+	SDL_Texture*		arrow6;
+	SDL_Texture*		arrow7;
+	SDL_Texture*		arrow8;
+	SDL_Texture*		arrow9;
 
 	uint				bonus_fx;
 	uint				ticks;
